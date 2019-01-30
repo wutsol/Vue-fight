@@ -7,10 +7,12 @@
       <span class="iconfont">&#xe632;</span>
       输入城市
     </div>
-    <div class="header-right">
-      {{this.city}}
-      <span class="iconfont arrow-icon">&#xe64a;</span>
-    </div>
+    <router-link to="/city">  <!-- 点击时跳转到city界面 -->
+      <div class="header-right">
+        {{this.city}}
+        <span class="iconfont arrow-icon">&#xe64a;</span>
+      </div>
+    </router-link>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
   @import '~styles/varibles.styl'
   .header
     display: flex
-    line-height: .86rem
+    line-height: $headerHeight
     background-color $bgColor
     color #fff
     .header-left
@@ -50,6 +52,7 @@ export default {
       width: 1.24rem
       float: right
       text-align center
+      color #fff // 去除使用router-link后字体颜色的变化
       .arrow-icon
         font-size .24rem
 </style>

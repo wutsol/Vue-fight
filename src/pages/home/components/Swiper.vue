@@ -3,7 +3,7 @@
     <swiper :options="swiperOption" v-if="showSwiper">
       <!-- slides -->
       <swiper-slide v-for="item of list" :key="item.id">
-        <img class="siper-img" :src="item.imgUrl">
+        <img class="swiper-img" :src="item.imgUrl">
       </swiper-slide>
       <!-- Optional controls -->
       <div class="swiper-pagination"  slot="pagination"></div>
@@ -43,6 +43,6 @@ export default {
     height 0
     padding-bottom 32%
     background-color #ccc
-    .siper-img
+    .swiper-img
       width 100%
 </style>

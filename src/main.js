@@ -6,13 +6,13 @@ import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 import fastClick from 'fastclick'
 import 'styles/reset.css'
-import 'styles/border.css'
+import 'styles/border.css' // 导入一像素文件
 import 'styles/iconfont.css'
 import 'swiper/dist/css/swiper.css'
 
 Vue.config.productionTip = false
 fastClick.attach(document.body)
-Vue.use(VueAwesomeSwiper)
+Vue.use(VueAwesomeSwiper) // 使用swiper组件
 
 /* eslint-disable no-new */
 new Vue({

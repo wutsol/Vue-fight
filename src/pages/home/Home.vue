@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     getHomeInfo () {
-      axios.get('/api/index.json')
+      axios.get('/api/index.json') // 通过创建static目录下的mock文件获取ajax数据
         .then(this.getHomeInfoSucc)
     },
     getHomeInfoSucc (res) {

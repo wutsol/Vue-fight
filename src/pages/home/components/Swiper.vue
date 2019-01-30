@@ -18,7 +18,8 @@ export default {
     return {
       swiperOption: {
         pagination: '.swiper-pagination', // 加载轮播时的点状图
-        loop: true // 实现循环播放
+        loop: true, // 实现循环播放
+        autoplay: 3000 // 每3秒自动滚动
       },
       swiperlist: [{
         id: '0001',

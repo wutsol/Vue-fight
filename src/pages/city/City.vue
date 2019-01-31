@@ -2,8 +2,8 @@
   <div> <!-- 自定义的组件需要外面包一个div标签 -->
     <city-header></city-header>
     <city-search></city-search>
-    <city-list :hot="hotCities" :cities="cities"></city-list>
-    <city-alphabet :cities="cities"></city-alphabet>
+    <city-list :hot="hotCities" :cities="cities" :letter="letter"></city-list>
+    <city-alphabet :cities="cities" @change="handleLetterChange"></city-alphabet>
   </div>
 </template>
 
@@ -18,7 +18,8 @@ export default {
   data () {
     return {
       cities: {},
-      hotCities: []
+      hotCities: [],
+      letter: '' // 传递给List组件
     }
   },
   components: {
@@ -34,11 +35,14 @@ export default {
     },
     getCityInfoSuc (res) {
       res = res.data
-      if (res.ref && res.data) {
+      if (res.ret && res.data) { // 打字都给打错咯
         const data = res.data
         this.cities = data.cities
         this.hotCities = data.hotCities
       }
+    },
+    handleLetterChange (letter) {
+      this.letter = letter
     }
   },
   mounted () {

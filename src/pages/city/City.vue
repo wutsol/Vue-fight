@@ -1,7 +1,7 @@
 <template>
   <div> <!-- 自定义的组件需要外面包一个div标签 -->
     <city-header></city-header>
-    <city-search></city-search>
+    <city-search :cities="cities"></city-search>
     <city-list :hot="hotCities" :cities="cities" :letter="letter"></city-list>
     <city-alphabet :cities="cities" @change="handleLetterChange"></city-alphabet>
   </div>

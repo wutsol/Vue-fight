@@ -9,7 +9,9 @@
       v-show="keyword"
     > <!-- 当输入后才会显示该列表 -->
       <ul>
-        <li class="search-item border-bottom" v-for="item of list" :key="item.id">
+        <li class="search-item border-bottom" v-for="item of list" :key="item.id"
+          @click="handleCityClick(item.name)"
+        >
           {{item.name}}
         </li>
         <li class="search-item border-bottom" v-show="hasNoData">
@@ -22,6 +24,7 @@
 
 <script>
 import Bscroll from 'better-scroll'
+import { mapMutations } from 'vuex' // vuex高级一些的API
 export default {
   name: 'CitySearch',
   props: {
@@ -34,12 +37,19 @@ export default {
       timer: null
     }
   },
+  methods: {
+    handleCityClick (city) {
+      this.changeCity(city) // 相当于this.$store.commit('changeCity', city)
+      this.$router.push('/') // 跳转到Home界面
+    },
+    ...mapMutations(['changeCity']) // 该方法相当于commit一个请求
+  },
   computed: {
     hasNoData () { // 当没找到匹配项时才显示
       return !this.list.length
     }
   },
-  watch: {
+  watch: { // 监听输入框的内容
     keyword () {
       if (this.timer) { // 做一个节流处理,提高性能
         clearTimeout(this.timer)

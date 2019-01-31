@@ -6,7 +6,7 @@
         <div class="button-list">
           <div class="button-wrapper">
             <div class="button">
-              北京
+              {{this.city}}
             </div>
           </div>
         </div>
@@ -14,18 +14,24 @@
       <div class="area">
         <div class="title boder-topbottom">热门城市</div>
         <div class="button-list">
-          <div class="button-wrapper" v-for="item of hot" :key="item.id">
+          <div class="button-wrapper" v-for="item of hot" :key="item.id"
+              @click="handleCityClick(item.name)"
+          >
             <div class="button">{{item.name}}</div>
           </div>
         </div>
       </div>
       <div class="area" v-for="(item, key) of cities" :key="key" :ref="key">
-        <div class="title boder-topbottom">{{key}}</div>
-          <div class="item-list">
-            <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id">
-              {{innerItem.name}}
-            </div>
+        <div class="title boder-topbottom">
+          {{key}}
+        </div>
+        <div class="item-list">
+          <div class="item border-bottom" v-for="innerItem of item" :key="innerItem.id"
+            @click="handleCityClick(innerItem.name)"
+          >
+            {{innerItem.name}}
           </div>
+        </div>
       </div>
     </div>
   </div>
@@ -33,6 +39,7 @@
 
 <script>
 import Bscroll from 'better-scroll' // 导入better-scroll插件，详情见github
+import { mapState, mapMutations } from 'vuex' // vuex高级一些的API
 export default {
   name: 'CityList',
   props: {
@@ -40,8 +47,15 @@ export default {
     cities: Object,
     letter: String // 获取传递过来的letter
   },
-  mounted () {
-    this.scroll = new Bscroll(this.$refs.wrapper)
+  computed: {
+    ...mapState(['city']) // 将vuex公用数据映射给计算属性并命名为city,用this.city取代html中this.$store.state.city
+  },
+  methods: {
+    handleCityClick (city) { // 使用这个函数后会导致点击Alphabet中的字母时无法跳转到对应list
+      this.changeCity(city) // 相当于this.$store.commit('changeCity', city)
+      this.$router.push('/') // 跳转到Home界面
+    },
+    ...mapMutations(['changeCity']) // 该方法相当于commit一个请求
   },
   watch: {
     letter () {
@@ -50,6 +64,9 @@ export default {
         this.scroll.scrollToElement(element)
       }
     }
+  },
+  mounted () {
+    this.scroll = new Bscroll(this.$refs.wrapper)
   }
 }
 </script>

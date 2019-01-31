@@ -17,10 +17,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex' // vuex高级一些的API
 export default {
   name: 'HomeHeader',
-  props: {
-    city: String
+  computed: {
+    ...mapState(['city']) // 将vuex公用数据映射给计算属性并命名为city,用this.city取代html中this.$store.state.city
   }
 }
 </script>
@@ -49,7 +50,8 @@ export default {
       border-radius .1rem
       color #ccc
     .header-right
-      width: 1.24rem
+      min-width: 1.04rem // 防止城市名过长导致页面布局混乱
+      padding 0 .1rem
       float: right
       text-align center
       color #fff // 去除使用router-link后字体颜色的变化

@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="banner" @click="handleBannerClick">
-      <img class="banner-img" src="//img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_600x330_f922b488.jpg">
+      <img class="banner-img" :src="bannerImg">
       <div class="banner-info">
-        <div class="banner-title">故宫(AAAAA景区)</div>
+        <div class="banner-title">{{this.sightName}}</div>
         <div class="banner-number">
           <span class="iconfont banner-icon">&#xe692;</span>
-          8
+          {{this.bannerImgs.length}}
         </div>
       </div>
     </div>
     <!-- 使用自定义组件是最外层要加一个div -->
-    <common-gallary :imgs="imgs" v-show="showGallery" @close="hadleGalleryClose">
+    <common-gallary :imgs="bannerImgs" v-show="showGallery" @close="hadleGalleryClose">
     </common-gallary>
   </div>
 </template>
@@ -20,10 +20,14 @@
 import CommonGallary from 'common/gallary/Gallary'
 export default {
   name: 'DetailBanner',
+  props: {
+    sightName: String,
+    bannerImg: String,
+    bannerImgs: Array
+  },
   data () {
     return {
-      showGallery: false, // 决定放大模式的显示与否
-      imgs: ['http://img1.qunarzz.com/sight/p0/1409/19/adca619faaab0898245dc4ec482b5722.jpg_r_800x800_6edd8174.jpg', 'http://img1.qunarzz.com/sight/p55/201211/04/fbcab3e5d6479ce893835fbb.jpg_r_800x800_6360f514.jpg']
+      showGallery: false // 决定放大模式的显示与否
     }
   },
   methods: {

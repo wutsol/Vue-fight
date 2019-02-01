@@ -30,7 +30,7 @@ export default {
     handleBannerClick () { // 点击banner进入放大图片模式
       this.showGallery = true
     },
-    hadleGalleryClose () { // 接受galler的close事件，关闭放大图模式
+    hadleGalleryClose () { // 接收galler的close事件，关闭放大图模式
       this.showGallery = false
     }
   },

@@ -1,12 +1,12 @@
 <template>
-  <div class="header">
-    <div class="header-abs" v-show="showAbs">
-      <router-link tag="div" to="/" class="iconfont header-abs-back">&#xe624;</router-link>
-    </div>
+  <div>
+    <router-link tag="div" to="/" class="header-abs" v-show="showAbs">
+      <div class="iconfont header-abs-back">&#xe624;</div>
+    </router-link>
     <div class="header-fixed" v-show="!showAbs" :style="opacityStyle">
       <!-- 动态绑定style，通过修改透明度增加渐隐渐现的效果 -->
-      <router-link tag="div" to="/" class="iconfont header-fixed-back">
-        &#xe624;
+      <router-link to="/">
+        <div class="iconfont header-fixed-back">&#xe624;</div>
       </router-link>
       <p class="header-fixed-text">景点详情</p>
     </div>
@@ -37,10 +37,16 @@ export default {
       }
     }
   },
-  activated () { // keep-alive组件激活时调用，并在加载页面时绑定
-    window.addEventListener('scroll', this.handleScroll) // 当滑动到一定距离时使header-abs隐藏
+  // activated () { // keep-alive组件激活时调用，并在加载页面时绑定
+  //   window.addEventListener('scroll', this.handleScroll) // 当滑动到一定距离时使header-abs隐藏
+  // },
+  // deactivated () { // 页面更新时解绑,防止所有页面都添加scroll事件
+  //   window.removeEventListener('scroll', this.handleScroll)
+  // }
+  mounted () { // 由于在App.vue中的keep-alive组件中排除了Detail部分，导致上面的两个钩子不再该组件存在，所以要借助这两个钩子实现同样的效果
+    window.addEventListener('scroll', this.handleScroll)
   },
-  deactivated () { // 页面更新时解绑,防止所有页面都添加scroll事件
+  unmounted () {
     window.removeEventListener('scroll', this.handleScroll)
   }
 }
@@ -76,6 +82,7 @@ export default {
       left 0
       text-align center
       font-size .4rem
+      color #fff
     .header-fixed-text
       font-size .32rem
       text-align center

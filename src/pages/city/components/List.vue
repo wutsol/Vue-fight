@@ -51,7 +51,7 @@ export default {
     ...mapState(['city']) // 将vuex公用数据映射给计算属性并命名为city,用this.city取代html中this.$store.state.city
   },
   methods: {
-    handleCityClick (city) { // 使用这个函数后会导致点击Alphabet中的字母时无法跳转到对应list
+    handleCityClick (city) { // 使用这个函数后会导致点击Alphabet中的字母时无法跳转到对应list(已完善)
       this.changeCity(city) // 相当于this.$store.commit('changeCity', city)
       this.$router.push('/') // 跳转到Home界面
     },
@@ -60,7 +60,7 @@ export default {
   watch: {
     letter () {
       if (this.letter) {
-        const element = this.$refs[this.letter][0] // 借助refs获得目标区域
+        const element = this.$refs[this.letter][0] // 借助refs获得目标区域DOM元素
         this.scroll.scrollToElement(element)
       }
     }

@@ -37,8 +37,11 @@ export default {
       }
     }
   },
-  activated () { // 由于之前使用了keep-alive，该钩子会存在
+  activated () { // keep-alive组件激活时调用，并在加载页面时绑定
     window.addEventListener('scroll', this.handleScroll) // 当滑动到一定距离时使header-abs隐藏
+  },
+  deactivated () { // 页面更新时解绑,防止所有页面都添加scroll事件
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>

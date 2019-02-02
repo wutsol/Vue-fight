@@ -8,7 +8,7 @@
         @touchmove="handleTouchMove"
         @touchend="handleTouchEnd"
         @click="handleLetterClick"
-    >
+    > <!-- .prevent防止拖动字母表时页面也跟着拖动 -->
       {{item}}
     </li>
   </ul>
